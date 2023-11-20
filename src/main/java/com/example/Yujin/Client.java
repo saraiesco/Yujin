@@ -28,4 +28,12 @@ public class Client {
     private String insurance;
 
 
+    public Client(String name, List<String> conditions , List<String > medicines, List<String> symptoms, String lastApp, String nextApp) {
+        this.name = name;
+        this.conditions =conditions;
+        this.medicines=medicines;
+        this.symptoms = symptoms;
+        this.lastApp = lastApp;
+        this.nextApp = nextApp;
+    }
 }

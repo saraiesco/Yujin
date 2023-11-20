@@ -24,6 +24,16 @@ public class Clinician {
     private String name;
     private String specialty;
 
+    //one-to-many relationship (clinician to clients)
     @DocumentReference
     private List<Client> clientIds;
+
+
+    public Clinician(String name, List<Client> clientIds , String username, String password, String specialty) {
+        this.name = name;
+        this.clientIds = clientIds;
+        this.username = username;
+        this.password = password;
+        this.specialty = specialty;
+    }
 }
