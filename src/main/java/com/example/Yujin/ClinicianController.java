@@ -45,9 +45,12 @@ public class ClinicianController {
         return new ResponseEntity<Clinician>(clinician, HttpStatus.CREATED);
     }
 
-    //put
-
     //patch
 
     //delete
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteClinician(@PathVariable ObjectId id) {
+        clinicianService.deleteClinician(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
 }

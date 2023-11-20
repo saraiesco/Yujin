@@ -35,9 +35,10 @@ public class ClinicianService {
         return clinicianRepository.save(clinician);
     }
 
-    //put
-
     //patch
 
     //delete
+    public void deleteClinician(ObjectId id) {
+        clinicianRepository.deleteById(id);
+    }
 }

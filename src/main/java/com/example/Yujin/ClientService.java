@@ -41,7 +41,10 @@ public class ClientService {
 //                .first();
     }
 
-    //put
+    //patch
 
     //delete
+    public void deleteClient(ObjectId id) {
+        clientRepository.deleteById(id);
+    }
 }

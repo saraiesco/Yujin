@@ -44,7 +44,12 @@ public class ClientController {
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
 
-    //put client
+    //patch client
 
     //delete client
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteClient(@PathVariable ObjectId id) {
+        clientService.deleteClient(id);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+    }
 }
