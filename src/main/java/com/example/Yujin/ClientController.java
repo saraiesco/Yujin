@@ -19,8 +19,8 @@ public class ClientController {
 
     //get all clients
     @GetMapping
-    public ResponseEntity<String> allClients(){
-        return new ResponseEntity<String>("All Clients", HttpStatus.OK);
+    public ResponseEntity<List<Client>> getAllClients(){
+        return new ResponseEntity<List<Client>>(clientService.allClients(), HttpStatus.OK);
     }
 
     //get one client
