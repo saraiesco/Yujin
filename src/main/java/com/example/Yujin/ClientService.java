@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,46 @@ public class ClientService {
 //                .first();
     }
 
+    public static class ClientNotFoundException extends RuntimeException {
+        public ClientNotFoundException(ObjectId id) {
+            super("Client not found with ID: " + id);
+        }
+    }
     //patch
+    @Transactional
+    public void patchClient(ObjectId id, String name, List<String> conditions, List<String> medicines, List<String> symptoms, String lastApp, String nextApp) {
+        Optional<Client> clientOptional = clientRepository.findById(id);
+
+        if (clientOptional.isPresent()) {
+            Client client = clientOptional.get();
+
+            if (name != null) {
+                client.setName(name);
+            }
+
+            if (conditions != null) {
+                client.setConditions(conditions);
+            }
+
+            if (symptoms != null) {
+                client.setSymptoms(symptoms);
+            }
+
+            if (medicines != null) {
+                client.setMedicines(medicines);
+            }
+            if (lastApp != null) {
+                client.setLastApp(lastApp);
+            }
+            if (nextApp != null) {
+                client.setNextApp(nextApp);
+            }
+
+            clientRepository.save(client);
+        } else {
+            throw new ClientNotFoundException(id);
+        }
+    }
 
     //delete
     public void deleteClient(ObjectId id) {

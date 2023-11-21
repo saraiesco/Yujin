@@ -3,6 +3,7 @@ package com.example.Yujin;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,40 @@ public class ClinicianService {
         return clinicianRepository.save(clinician);
     }
 
+    public static class ClinicianNotFoundException extends RuntimeException {
+        public ClinicianNotFoundException(ObjectId id) {
+            super("Clinician not found with ID: " + id);
+        }
+    }
     //patch
+    @Transactional
+    public void patchClinician(ObjectId id, String name, String username, String password, String specialty) {
+        Optional<Clinician> clinicianOptional = clinicianRepository.findById(id);
+
+        if (clinicianOptional.isPresent()) {
+            Clinician clinician = clinicianOptional.get();
+
+            if (name != null) {
+                clinician.setName(name);
+            }
+
+            if (username != null) {
+                clinician.setUsername(username);
+            }
+
+            if (password != null) {
+                clinician.setPassword(password);
+            }
+
+            if (specialty != null) {
+                clinician.setSpecialty(specialty);
+            }
+
+            clinicianRepository.save(clinician);
+        } else {
+            throw new ClinicianNotFoundException(id);
+        }
+    }
 
     //delete
     public void deleteClinician(ObjectId id) {

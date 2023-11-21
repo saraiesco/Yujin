@@ -33,7 +33,7 @@ public class ClinicianController {
 
     //post
     @PostMapping
-    public ResponseEntity<Clinician> createClient(@RequestBody Map<String, Object> payload) {
+    public ResponseEntity<Clinician> createClinician(@RequestBody Map<String, Object> payload) {
         String name = (String) payload.get("name");
         List<Client> clientIds = (List<Client>) payload.get("clientIds");
         String username = (String) payload.get("username");
@@ -45,7 +45,18 @@ public class ClinicianController {
         return new ResponseEntity<Clinician>(clinician, HttpStatus.CREATED);
     }
 
+
     //patch
+    @PatchMapping("/{id}")
+    public ResponseEntity<Clinician> updateClinician(@PathVariable ObjectId id, @RequestBody Map<String, Object> payload) {
+        clinicianService.patchClinician(id,
+                (String) payload.get("name"),
+                (String) payload.get("username"),
+                (String) payload.get("password"),
+                (String) payload.get("specialty"));
+
+        return new ResponseEntity<Clinician>(HttpStatus.OK);
+    }
 
     //delete
     @DeleteMapping("/{id}")

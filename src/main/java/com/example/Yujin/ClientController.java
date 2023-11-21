@@ -45,6 +45,17 @@ public class ClientController {
     }
 
     //patch client
+    @PatchMapping("/{id}")
+    public ResponseEntity<Client> updateClient(@PathVariable ObjectId id, @RequestBody Map<String, Object> payload) {
+        clientService.patchClient(id,
+                (String) payload.get("name"),
+                (List<String>) payload.get("conditions"),
+                (List<String>) payload.get("medicines"),
+                (List<String>) payload.get("symptoms"),
+                (String) payload.get("lastApp"),
+                (String) payload.get("nextApp"));
+        return new ResponseEntity<Client>(HttpStatus.OK);
+    }
 
     //delete client
     @DeleteMapping("/{id}")
