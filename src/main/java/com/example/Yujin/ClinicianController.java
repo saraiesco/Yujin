@@ -13,7 +13,7 @@ import java.util.Optional;
 //uses service class to call All clinicians, delegate task of getting clinician to api layer
 //ui layer
 @RestController
-@RequestMapping("/Clinicians")
+@RequestMapping("/clinicians")
 public class ClinicianController {
     @Autowired
     private ClinicianService clinicianService;
@@ -22,6 +22,18 @@ public class ClinicianController {
     @GetMapping
     public ResponseEntity<List<Clinician>> getAllClinicians(){
         return new ResponseEntity<List<Clinician>>(clinicianService.allClinicians(), HttpStatus.OK);
+    }
+
+    // Login
+    @PostMapping("/login")
+    public ResponseEntity<Clinician> login(@RequestBody Clinician credentials) {
+        Clinician clinician = clinicianService.login(credentials.getUsername(), credentials.getPassword());
+
+        if (clinician != null) {
+            return new ResponseEntity<>(clinician, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     //get one

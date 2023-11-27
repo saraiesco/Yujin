@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.*;
 
 import java.util.List;
 
@@ -29,11 +28,13 @@ public class Clinician {
     private List<Client> clientIds;
 
 
-    public Clinician(String name, List<Client> clientIds , String username, String password, String specialty) {
+
+    public Clinician(String name, List<Client> clientIds, String username, String password, String specialty) {
         this.name = name;
         this.clientIds = clientIds;
         this.username = username;
         this.password = password;
         this.specialty = specialty;
     }
+
 }

@@ -19,14 +19,25 @@ public class ClinicianService {
 
     //getAll
     public List<Clinician> allClinicians(){
-        System.out.println(clinicianRepository.findAll().toString());
-                return clinicianRepository.findAll();
+        System.out.println(clinicianRepository.findAll());
+        return clinicianRepository.findAll();
+    }
+
+    //login
+    public Clinician login(String username, String password) {
+        Clinician clinician = clinicianRepository.findByUsername(username);
+
+        if (clinician != null && clinician.getPassword().equals(password)) {
+            return clinician;
+        } else {
+            return null;
+        }
     }
 
     //getOne
     //optional needed in case id returns null
     public Optional<Clinician> singleClinician(ObjectId id){
-            return clinicianRepository.findById(id);
+        return clinicianRepository.findById(id);
     }
 
     //post
