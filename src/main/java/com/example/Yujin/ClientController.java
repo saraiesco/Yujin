@@ -34,6 +34,7 @@ public class ClientController {
     public ResponseEntity<Client> createClient(@RequestBody Map<String, Object> payload) {
         String name = (String) payload.get("name");
         String img = (String) payload.get("img");
+        Integer age = (Integer)payload.get("age");
         List<String> conditions = (List<String>) payload.get("conditions");
         List<String> medicines = (List<String>) payload.get("medicines");
         List<String> symptoms = (List<String>) payload.get("symptoms");
@@ -41,7 +42,7 @@ public class ClientController {
         String nextApp = (String) payload.get("nextApp");
         ObjectId id = (ObjectId) payload.get("id");
 
-        Client client = clientService.createClient(name, img, conditions, medicines, symptoms, lastApp, nextApp,id);
+        Client client = clientService.createClient(name, img, age, conditions, medicines, symptoms, lastApp, nextApp,id);
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
 

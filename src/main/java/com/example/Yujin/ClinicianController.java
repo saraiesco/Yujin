@@ -51,9 +51,8 @@ public class ClinicianController {
         String username = (String) payload.get("username");
         String password = (String) payload.get("password");
         String specialty = (String) payload.get("specialty");
-        ObjectId id = (ObjectId) payload.get("id");
 
-        Clinician clinician = clinicianService.createClinician(name, clientIds, username, password, specialty, id);
+        Clinician clinician = clinicianService.createClinician(name, clientIds, username, password, specialty) ;
         return new ResponseEntity<Clinician>(clinician, HttpStatus.CREATED);
     }
 

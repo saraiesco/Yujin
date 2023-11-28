@@ -47,10 +47,10 @@ public class ClinicianService {
     }
 
     //post
-    public Clinician createClinician( String name, List<Client> clientIds, String username, String password, String specialty, ObjectId id){
-        Clinician clinician = clinicianRepository.insert(new Clinician( name ,clientIds, username, password, specialty));
-
-        return clinicianRepository.save(clinician);
+    public Clinician createClinician( String name, List<Client> clientIds, String username, String password, String specialty){
+        Clinician clinician = new Clinician(name, clientIds, username, password, specialty);
+        Clinician savedClinician = clinicianRepository.insert(clinician);
+        return savedClinician;
     }
 
     public static class ClinicianNotFoundException extends RuntimeException {

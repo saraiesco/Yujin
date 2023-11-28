@@ -29,6 +29,7 @@ public class Clinician {
 
     //one-to-many relationship (clinician to clients)
     @DocumentReference
+    @DBRef(lazy = true)
     private List<Client> clientIds;
 
 //names because ObjectIDs are turned into timestamps/date
@@ -45,9 +46,13 @@ public class Clinician {
 public List<Client> populateClientObjects(ClientRepository clientRepository) {
     List<Client> fullClientObjects = new ArrayList<>();
 
-    for (String clientName : clientNames) {
-        List<Client> clients = clientRepository.findByName(clientName);
-        fullClientObjects.addAll(clients);
+    if (this.clientNames != null) {
+        for (String clientName : clientNames) {
+            List<Client> clients = clientRepository.findByName(clientName);
+            if (clients != null) {
+                fullClientObjects.addAll(clients);
+            }
+        }
     }
     return fullClientObjects;
 }
