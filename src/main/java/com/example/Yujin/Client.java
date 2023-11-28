@@ -17,6 +17,7 @@ public class Client {
     @Id
     private ObjectId id;
     private String name;
+    private String img;
     private List<String> conditions;
     private List<String>  medicines;
 
@@ -28,8 +29,9 @@ public class Client {
     private String insurance;
 
 
-    public Client(String name, List<String> conditions , List<String > medicines, List<String> symptoms, String lastApp, String nextApp) {
+    public Client(String name, String img, List<String> conditions , List<String > medicines, List<String> symptoms, String lastApp, String nextApp) {
         this.name = name;
+        this.img = img;
         this.conditions =conditions;
         this.medicines=medicines;
         this.symptoms = symptoms;

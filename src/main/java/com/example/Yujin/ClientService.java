@@ -30,8 +30,8 @@ public class ClientService {
     }
 
     //post
-    public Client createClient(String name, List<String> conditions, List<String> medicines, List<String> symptoms, String lastApp, String nextApp, ObjectId id){
-        Client client = clientRepository.insert(new Client(name, conditions, medicines, symptoms, lastApp, nextApp));
+    public Client createClient(String name,String img, List<String> conditions, List<String> medicines, List<String> symptoms, String lastApp, String nextApp, ObjectId id){
+        Client client = clientRepository.insert(new Client(name, img, conditions, medicines, symptoms, lastApp, nextApp));
         return clientRepository.save(client);
 
         //come back to fix association !
